@@ -22,10 +22,21 @@ async function run() {
 
     try{
         const projectsCollection = client.db('PortfolioRakibul').collection('projects');
+        const skillsCollection = client.db('PortfolioRakibul').collection('skills');
+        const blogsCollection = client.db('PortfolioRakibul').collection('blogs');
+
+       app.get('/skills', async (req, res) => {
+            const result = await skillsCollection.find({}).toArray();
+            res.send(result)  
+       })
 
        app.get('/projects', async (req, res) => {
-            const projects = {};
-            const result = await projectsCollection.find(projects).toArray();
+            const result = await projectsCollection.find({}).toArray();
+            res.send(result)  
+       })
+
+       app.get('/blogs', async (req, res) => {
+            const result = await blogsCollection.find({}).toArray();
             res.send(result)  
        })
 
@@ -34,6 +45,13 @@ async function run() {
             const filter = { _id: ObjectId(id) };
             const project = await projectsCollection.findOne(filter);
             res.send(project)  
+       })
+
+       app.get('/blog/details/:_id', async (req, res) => {
+            const id = req.params._id;
+            const filter = { _id: ObjectId(id) };
+            const blog = await blogsCollection.findOne(filter);
+            res.send(blog)  
        })
 
     }
