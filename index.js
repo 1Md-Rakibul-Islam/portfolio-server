@@ -65,7 +65,7 @@ run().catch(console.log())
 
 
 app.get('/', async(req, res) => {
-    res.send('Portfolio server is running');
+    res.send('Portfolio server is Running');
 })
 
 app.listen(port, () => {
