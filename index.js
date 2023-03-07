@@ -24,6 +24,7 @@ async function run() {
         const projectsCollection = client.db('PortfolioRakibul').collection('projects');
         const skillsCollection = client.db('PortfolioRakibul').collection('skills');
         const blogsCollection = client.db('PortfolioRakibul').collection('blogs');
+        const testimonialsCollection = client.db('PortfolioRakibul').collection('testimonials');
 
        app.get('/skills', async (req, res) => {
             const result = await skillsCollection.find({}).toArray();
@@ -37,6 +38,11 @@ async function run() {
 
        app.get('/blogs', async (req, res) => {
             const result = await blogsCollection.find({}).toArray();
+            res.send(result)  
+       })
+
+       app.get('/testimonials', async (req, res) => {
+            const result = await testimonialsCollection.find({}).toArray();
             res.send(result)  
        })
 
